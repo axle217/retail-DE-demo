@@ -45,25 +45,20 @@ docker compose up -d
 
 # Wait for PostgreSQL to be ready before executing the SQL script to create the star schema
 
-CONTAINER="retail-data-engineering-postgres-1"
-
 echo "Waiting for PostgreSQL..."
-
-until docker exec "$CONTAINER" pg_isready -U $POSTGRES_USER >/dev/null 2>&1; do
-    sleep 2
+until docker compose exec -T postgres \
+  pg_isready -U "$POSTGRES_USER" >/dev/null 2>&1; do
+  sleep 2
 done
 
-echo "PostgreSQL is ready."
+docker compose exec -T postgres \
+  psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" \
+  < postgres/create_star_schema.sql
 
-docker exec -i "$CONTAINER" \
-    psql -U $POSTGRES_USER -d $POSTGRES_DB \
-    < postgres/create_star_schema.sql
+docker compose exec -T postgres \
+  psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" \
+  < postgres/create_oltp.sql
 
-
-docker exec -i "$CONTAINER" \
-    psql -U $POSTGRES_USER -d $POSTGRES_DB \
-    < postgres/create_oltp.sql
-
-# docker exec -it "$CONTAINER" psql -U $POSTGRES_USER -d $POSTGRES_DB
+# docker compose exec -T postgres psql -U "$POSTGRES_USER"
 
 # sudo chown -R $(id -u):$(id -g) dags logs plugins config
