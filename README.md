@@ -27,7 +27,7 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-The script setup .env which contains secrets, build Docker environment, and setup the schemas. It is recomended to change username and password in `setup.sh` and secure it if want to develop into production.
+The script sets up .env which contains secrets, build Docker environment, and setup the schemas. It is recomended to change username and password in `setup.sh` and secure it if want to develop into production.
 
 
 ### 2. Connect to database in Airflow
