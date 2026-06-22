@@ -27,12 +27,12 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-The script setup .env which contains secrets, build Docker environment, and setup the schemas. It is recomended to change username and password in 'setup.sh' and secure it if want to develop into production.
+The script setup .env which contains secrets, build Docker environment, and setup the schemas. It is recomended to change username and password in `setup.sh` and secure it if want to develop into production.
 
 
 ### 2. Connect to database in Airflow
 
-There are two database created in the setup earlier, 'retail_oltp' and 'retail_dw'.
+There are two database created in the setup earlier, `retail_oltp` and `retail_dw`.
 
 To connect:
 Go to Admin -> Connections -> Add Connection
@@ -42,8 +42,8 @@ Add:
 - Connection Type: Postgres
 - Host: postgres
 - Description: (your description)
-- Login: (POSTGRES_USER in 'setup.sh)
-- Password: (POSTGRES_PASSWORD in 'setup.sh)
+- Login: (POSTGRES_USER in `setup.sh)
+- Password: (POSTGRES_PASSWORD in `setup.sh)
 - Port: 5432
 - Database: retail_oltp
 
@@ -52,7 +52,7 @@ Do it again retail_dw.
 ### 3. Run the jobs
 
 Generate the raw data:
-- Go to Dags -> Look for 'generate_oltp_data' -> Trigger
+- Go to Dags -> Look for `generate_oltp_data` -> Trigger
 
 ETL the raw data to star schema:
-- Go to Dags -> Look for 'load_raw_to_dw' -> Trigger
+- Go to Dags -> Look for `load_raw_to_dw` -> Trigger
