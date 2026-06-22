@@ -1,0 +1,11 @@
+dlt[duckdb]
+duckdb
+dbt-core
+dbt-duckdb
+pandas
+requests
+python-dotenv
+pyarrow
+faker
+psycopg2-binary
+apache-airflow-providers-postgres
