@@ -42,12 +42,12 @@ Add:
 - Connection Type: Postgres
 - Host: postgres
 - Description: (your description)
-- Login: (POSTGRES_USER in `setup.sh)
-- Password: (POSTGRES_PASSWORD in `setup.sh)
+- Login: (POSTGRES_USER in `setup.sh`)
+- Password: (POSTGRES_PASSWORD in `setup.sh`)
 - Port: 5432
 - Database: retail_oltp
 
-Do it again retail_dw.
+Do it again for retail_dw.
 
 ### 3. Run the jobs
 
