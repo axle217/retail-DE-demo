@@ -66,10 +66,26 @@ x-airflow-common:
     AIRFLOW__CORE__EXECUTION_API_SERVER_URL: 'http://airflow-apiserver:8080/execution/'
     AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW__API_AUTH__JWT_SECRET:-airflow_jwt_secret}
     AIRFLOW__API_AUTH__JWT_ISSUER: ${AIRFLOW__API_AUTH__JWT_ISSUER:-airflow}
-    # HOSTNAME: ${HOSTNAME:-airflow}
     
     AIRFLOW__LOGGING__REMOTE_LOGGING: "False"
     AIRFLOW__LOGGING__BASE_LOG_FOLDER: "/opt/airflow/logs"
+
+    # Setup Airflow connections for retail_oltp and retail_dw databases. You can use those connections in your DAGs.
+    AIRFLOW_CONN_RETAIL_OLTP: postgresql://${POSTGRES_USER:-airflow}:${POSTGRES_PASSWORD:-airflow}@postgres:5432/retail_oltp
+    AIRFLOW_CONN_RETAIL_DW: postgresql://${POSTGRES_USER:-airflow}:${POSTGRES_PASSWORD:-airflow}@postgres:5432/retail_dw
+    # Alternatively, you can set those connections in the Airflow UI or using CLI. The above method is just for convenience. 
+    # Go to Admin -> Connections -> Add Connection
+    # Add:
+    # - Connection Id: retail_oltp
+    # - Connection Type: Postgres
+    # - Host: postgres
+    # - Description: (your description)
+    # - Login: (POSTGRES_USER in `setup.sh`)
+    # - Password: (POSTGRES_PASSWORD in `setup.sh`)
+    # - Port: 5432
+    # - Database: retail_oltp
+    # Do it again for retail_dw.
+    # In production, you should use a more secure way to set connections (e.g. using secrets backend or environment variables with connection URI).
 
     # yamllint disable rule:line-length
     # Use simple http server on scheduler for health checks
